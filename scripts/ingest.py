@@ -52,6 +52,9 @@ def main():
     from tqdm import tqdm
     
     OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
+    if not OPENROUTER_API_KEY:
+        raise ValueError("The OPENROUTER_API_KEY environment variable is not set. Please set it in your environment.")
+
     OPENROUTER_EMBEDDING_MODEL_NAME = os.getenv("OPENROUTER_EMBEDDING_MODEL_NAME")
 
     openrouter_client = OpenAI(

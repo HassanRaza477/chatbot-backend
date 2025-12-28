@@ -29,9 +29,13 @@ qdrant_client = QdrantClient(
     timeout=60
 )
 
+openrouter_api_key = os.getenv("OPENROUTER_API_KEY")
+if not openrouter_api_key:
+    raise ValueError("The OPENROUTER_API_KEY environment variable is not set. Please set it in your Railway deployment settings.")
+
 openrouter_client = OpenAI(
     base_url="https://openrouter.ai/api/v1",
-    api_key=os.getenv("OPENROUTER_API_KEY"),
+    api_key=openrouter_api_key,
 )
 
 # Pydantic models
