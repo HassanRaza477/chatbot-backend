@@ -54,7 +54,7 @@ def main():
     OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
     OPENROUTER_EMBEDDING_MODEL_NAME = os.getenv("OPENROUTER_EMBEDDING_MODEL_NAME")
 
-    client = OpenAI(
+    openrouter_client = OpenAI(
         base_url="https://openrouter.ai/api/v1",
         api_key=OPENROUTER_API_KEY,
     )
@@ -63,7 +63,7 @@ def main():
 
     print("Generating embeddings with OpenRouter...")
     for chunk in tqdm(chunks):
-        response = client.embeddings.create(
+        response = openrouter_client.embeddings.create(
             model="thenlper/gte-base", 
             input=chunk["content"],
         )

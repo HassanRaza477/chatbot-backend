@@ -29,9 +29,9 @@ qdrant_client = QdrantClient(
     timeout=60
 )
 
-openai_client = OpenAI(
+openrouter_client = OpenAI(
     base_url="https://openrouter.ai/api/v1",
-    api_key=os.getenv("OPENROUTER_API_KEY") or os.getenv("OPENAI_API_KEY"),
+    api_key=os.getenv("OPENROUTER_API_KEY"),
 )
 
 # Pydantic models
@@ -56,7 +56,7 @@ async def chat(request: ChatRequest):
     else:
         # Search Qdrant for context
         try:
-            embedding = openai_client.embeddings.create(
+            embedding = openrouter_client.embeddings.create(
                 model="thenlper/gte-base",
                 input=request.query
             ).data[0].embedding
@@ -77,7 +77,7 @@ async def chat(request: ChatRequest):
     # Call OpenRouter for answer
     print("Calling OpenRouter for answer...")
     try:
-        completion = openai_client.chat.completions.create(
+        completion = openrouter_client.chat.completions.create(
             model=os.getenv("OPENROUTER_MODEL_NAME"),
             messages=[
                 {"role": "system", "content": "You are a helpful assistant. Answer the user's question based on the provided context."},
