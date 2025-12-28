@@ -5,10 +5,6 @@ from pydantic import BaseModel
 from openai import OpenAI
 from qdrant_client import QdrantClient
 
-# --- DEBUGGING TEST_VAR START ---
-print(f"DEBUG: TEST_VAR = {os.getenv('TEST_VAR')}")
-# --- DEBUGGING TEST_VAR END ---
-
 # Initialize FastAPI app
 app = FastAPI()
 
